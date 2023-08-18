@@ -8,4 +8,14 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    public function allProducts()
+    {
+        $products = Product::all();
+        return response()->json($products);
+    }
+
+    public function createProduct(Request $request)
+    {
+        
+    }
 }
