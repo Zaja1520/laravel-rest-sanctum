@@ -38,4 +38,26 @@ class ProductController extends Controller
         $product = Product::find($id);
         return response()->json($product);
     }
+
+    public function updateProduct(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'name' =>'required',
+            'slug' =>'required',
+            'description' =>'required',
+            'price' =>'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+        // find product id  and modify data
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->save();
+
+        return response()->json($product);
+    }
 }
