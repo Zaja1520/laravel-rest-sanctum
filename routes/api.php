@@ -18,15 +18,23 @@ use App\Http\Controllers\Api\ProductController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//public routes
 // show all products
 Route::get('/products', [ProductController::class, 'allProducts']);
-//create product
-Route::post('/products', [ProductController::class, 'createProduct']);
 //product info
 Route::get('/products/{id}', [ProductController::class, 'productInfo']);
-//update product
-Route::put('/products/update/{id}', [ProductController::class, 'updateProduct']);
-//delete product
-Route::post('/products/delete/{id}', [ProductController::class, 'deleteProduct']);
 //search product
 Route::get('/products/search/{name}', [ProductController::class, 'searchProduct']);
+
+
+ //protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    //create product
+    Route::post('/products/create', [ProductController::class, 'createProduct']);
+    //update product
+    Route::put('/products/update/{id}', [ProductController::class, 'updateProduct']);
+    //delete product
+    Route::post('/products/delete/{id}', [ProductController::class, 'deleteProduct']);
+
+});
