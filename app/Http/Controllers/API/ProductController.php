@@ -31,4 +31,11 @@ class ProductController extends Controller
         return Product::create($request->all());
         
     }
+
+    public function productInfo(Request $request, $id)
+    {
+        // find product info by id
+        $product = Product::find($id);
+        return response()->json($product);
+    }
 }
