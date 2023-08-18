@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get('/products', [ProductController::class, 'allProducts']);
 Route::get('/products/{id}', [ProductController::class, 'productInfo']);
 //search product
 Route::get('/products/search/{name}', [ProductController::class, 'searchProduct']);
+//register products
+Route::post('/register', [AuthController::class,'registerUser']);
 
 
  //protected routes
