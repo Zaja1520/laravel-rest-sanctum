@@ -60,4 +60,16 @@ class ProductController extends Controller
 
         return response()->json($product);
     }
+
+    public function deleteProduct(Request $request, $id)
+    {
+        //delete the product by id from the product model
+        return Product::destroy($id);
+    }
+
+    public function searchProduct($name)
+    {
+        //search the product by name
+        return Product::where('name', 'like', '%' . $name . '%')->get();
+    }
 }
