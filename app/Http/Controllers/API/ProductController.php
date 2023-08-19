@@ -36,7 +36,18 @@ class ProductController extends Controller
     {
         // find product info by id
         $product = Product::find($id);
-        return response()->json($product);
+        if ($product){
+            return response()->json([
+                'status' => 'Get product successful',
+                'product' => $product
+            ]);
+        }
+        else {
+            return response()->json([
+                'status' => 'product not found'
+            ]);
+        }
+        
     }
 
     public function updateProduct(Request $request, $id){
@@ -50,13 +61,26 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
+        
         // find product id  and modify data
         $product = Product::find($id);
-        $product->name = $request->name;
-        $product->slug = $request->slug;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->save();
+        if ($product){
+            $product->name = $request->name;
+            $product->slug = $request->slug;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->save();
+            return response()->json([
+                'status' => 'updated successfully',
+                'product' => $product
+            ]);
+        }
+        else {
+            return response()->json([
+                'status' => 'product not found'
+            ]);
+        }
+       
 
         return response()->json($product);
     }
@@ -64,7 +88,19 @@ class ProductController extends Controller
     public function deleteProduct(Request $request, $id)
     {
         //delete the product by id from the product model
-        return Product::destroy($id);
+        $deleteProduct = Product::destroy($id);
+        if ($deleteProduct){
+            return response()->json([
+                'status' => 'deleted successfully',
+            ]);
+        }
+        
+        else {
+            return response()->json([
+                'status' => 'product not found',
+            ]);
+        }
+     
     }
 
     public function searchProduct($name)

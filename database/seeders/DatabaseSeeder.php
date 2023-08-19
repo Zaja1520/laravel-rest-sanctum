@@ -20,10 +20,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        for($i=0;$i<10;$i++)
+        for($i=0;$i<20;$i++)
         {
             $product = Product::create([
                 "name" => "Test Product" . $i,
+                "slug" => "test-product" .$i,
                 "description" => "This is a test product". $i,
                 "price" => 100.99,
             ]);

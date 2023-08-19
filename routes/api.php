@@ -30,7 +30,7 @@ Route::get('/products/search/{name}', [ProductController::class, 'searchProduct'
 //register products
 Route::post('/register', [AuthController::class,'registerUser']);
 //login
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
  //protected routes

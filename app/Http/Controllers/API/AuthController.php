@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $field = $request->validate([
             'name' => 'required',
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email'],
             'password' => ['required','string','min:8', 'confirmed'],
         ]);
 
@@ -50,8 +50,8 @@ class AuthController extends Controller
         }
 
         $response = [
+            'status' => 'Login Successful',
             'user' => $user,
-            'message' => 'success',
             'token' => $user->createToken('authToken')->plainTextToken,
         ];
 
