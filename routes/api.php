@@ -29,6 +29,8 @@ Route::get('/products/{id}', [ProductController::class, 'productInfo']);
 Route::get('/products/search/{name}', [ProductController::class, 'searchProduct']);
 //register products
 Route::post('/register', [AuthController::class,'registerUser']);
+//login
+Route::post('/login', [AuthController::class, 'login']);
 
 
  //protected routes
@@ -39,5 +41,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/products/update/{id}', [ProductController::class, 'updateProduct']);
     //delete product
     Route::post('/products/delete/{id}', [ProductController::class, 'deleteProduct']);
-
+    //logout route
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
